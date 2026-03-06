@@ -1003,7 +1003,24 @@ def main() -> None:
     # Запускаем бота
     application.run_polling()
 
+# ПРОСТОЙ ОБРАБОТЧИК ДЛЯ ТЕСТА (временно заменяет всю логику)
+async def simple_start(update: Update, context: CallbackContext) -> None:
+    """Простой старт без регистрации"""
+    await update.message.reply_text(
+        "Привет! Это тестовый режим.\n"
+        "Напиши /admin если ты админ"
+    )
+
+async def simple_admin(update: Update, context: CallbackContext) -> None:
+    """Простой админ"""
+    await update.message.reply_text("Ты в админке (тест)")
+
+# Создаём новое приложение
+application = Application.builder().token(TOKEN).build()
+application.add_handler(CommandHandler("start", simple_start))
+application.add_handler(CommandHandler("admin", simple_admin))
 if __name__ == "__main__":
 
     main()
+
 
