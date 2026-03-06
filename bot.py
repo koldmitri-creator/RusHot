@@ -23,7 +23,7 @@ from telegram.ext import (
  ADMIN_PRODUCT_PRICE, ADMIN_PRODUCT_EXPIRY, ADMIN_PRODUCT_PHOTO) = range(11)
 
 # --- Настройки ---
-TOKEN = "YOUR_BOT_TOKEN_HERE"  # Замени на свой токен
+TOKEN = "8557367254:AAFv2Tg9mVVuv5qSPul-LKrDHKAVJLZ4mAQ"  # Замени на свой токен
 ADMIN_IDS = [123456789]  # Список ID администраторов
 
 # Файлы для хранения данных
@@ -1004,4 +1004,5 @@ def main() -> None:
     application.run_polling()
 
 if __name__ == "__main__":
+
     main()
