@@ -23,8 +23,8 @@ from telegram.ext import (
  ADMIN_PRODUCT_PRICE, ADMIN_PRODUCT_EXPIRY, ADMIN_PRODUCT_PHOTO) = range(11)
 
 # --- Настройки ---
-TOKEN = "8557367254:AAFv2Tg9mVVuv5qSPu1-LKrDHKAVJLZ4mAQ"  # Замени на свой токен
-ADMIN_IDS = [123456789]  # Список ID администраторов
+TOKEN = "8557367254:AAFv2Tg9mVVuv5qSPu1-LKrDHKAVJLZ4mAQ"  # Твой токен
+ADMIN_IDS = [123456789]  # Замени на свой ID
 
 # Файлы для хранения данных
 USERS_FILE = "users.json"
@@ -246,10 +246,17 @@ async def show_main_menu(update: Update, context: CallbackContext) -> None:
     if not categories_data:
         keyboard = [[InlineKeyboardButton("🛒 Корзина", callback_data="view_cart")]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        await update.message.reply_text(
-            "Пока нет доступных категорий. Загляните позже!",
-            reply_markup=reply_markup
-        )
+        
+        if update.callback_query:
+            await update.callback_query.edit_message_text(
+                "Пока нет доступных категорий. Загляните позже!",
+                reply_markup=reply_markup
+            )
+        else:
+            await update.message.reply_text(
+                "Пока нет доступных категорий. Загляните позже!",
+                reply_markup=reply_markup
+            )
         return
     
     # Создаем кнопки категорий
@@ -351,7 +358,7 @@ async def show_product(update: Update, context: CallbackContext) -> None:
             reply_markup=reply_markup
         )
 
-async def add_to_cart(update: Update, context: CallbackContext, product_id: str) -> None:
+async def add_to_cart(update: Update, context: CallbackContext, product_id: str) -> int:
     """Добавление товара в корзину с выбором количества"""
     context.user_data["adding_product"] = product_id
     keyboard = [
@@ -1003,24 +1010,5 @@ def main() -> None:
     # Запускаем бота
     application.run_polling()
 
-# ПРОСТОЙ ОБРАБОТЧИК ДЛЯ ТЕСТА (временно заменяет всю логику)
-async def simple_start(update: Update, context: CallbackContext) -> None:
-    """Простой старт без регистрации"""
-    await update.message.reply_text(
-        "Привет! Это тестовый режим.\n"
-        "Напиши /admin если ты админ"
-    )
-
-async def simple_admin(update: Update, context: CallbackContext) -> None:
-    """Простой админ"""
-    await update.message.reply_text("Ты в админке (тест)")
-
-# Создаём новое приложение
-application = Application.builder().token(TOKEN).build()
-application.add_handler(CommandHandler("start", simple_start))
-application.add_handler(CommandHandler("admin", simple_admin))
 if __name__ == "__main__":
-
     main()
-
-
