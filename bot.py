@@ -24,7 +24,7 @@ from telegram.ext import (
 
 # --- Настройки ---
 TOKEN = "8557367254:AAFv2Tg9mVVuv5qSPu1-LKrDHKAVJLZ4mAQ"  # Твой токен
-ADMIN_IDS = [123456789]  # Замени на свой ID
+ADMIN_IDS = [190416203]  # Замени на свой ID
 
 # Файлы для хранения данных
 USERS_FILE = "users.json"
@@ -1012,3 +1012,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
