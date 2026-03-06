@@ -23,7 +23,7 @@ from telegram.ext import (
  ADMIN_PRODUCT_PRICE, ADMIN_PRODUCT_EXPIRY, ADMIN_PRODUCT_PHOTO) = range(11)
 
 # --- Настройки ---
-TOKEN = "8557367254:AAFv2Tg9mVVuv5qSPu1-LKrDHKAVJLZ4mAQ"  # Твой токен
+TOKEN = "8557367254:AAFv2Tg9mVuv5qSPu1-LKrDHKAVJLZ4mAQ"  # Твой токен
 ADMIN_IDS = [190416203]  # Замени на свой ID
 
 # Файлы для хранения данных
@@ -1012,4 +1012,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
